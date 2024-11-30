@@ -150,12 +150,6 @@ Response:
 }
 ```
 
-## Starting
-
-```cmd
-php -S localhost:8000 -t public
-```
-
 ## How the Authentication Works
 
 - JWT (JSON Web Token): JWT is used to authenticate users in the API. When a user logs in with valid credentials, the server responds with a JWT token.
