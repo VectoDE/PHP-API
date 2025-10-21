@@ -1,11 +1,20 @@
 <?php
-// Include the database configuration file and the routing file
 
-// Including the `db.php` file which handles the database connection
-// The `dirname(__DIR__)` function ensures that the path is relative to the parent directory of the current file, making it portable
-// This file establishes the connection to the SQLite database
-require_once dirname(__DIR__) . '/config/db.php';
+declare(strict_types=1);
 
-// Including the `api.php` file where the main routing and request handling logic is implemented
-// This file defines the routes (e.g., `/register`, `/login`) and processes the HTTP requests made to the API
-require_once dirname(__DIR__) . '/routes/api.php';
+use App\Application;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+spl_autoload_register(static function (string $class): void {
+    if (str_starts_with($class, 'App\\')) {
+        $relativePath = str_replace('\\', '/', substr($class, 4));
+        $file = dirname(__DIR__) . '/src/' . $relativePath . '.php';
+        if (is_file($file)) {
+            require $file;
+        }
+    }
+});
+
+$app = new Application(dirname(__DIR__));
+$app->run();
