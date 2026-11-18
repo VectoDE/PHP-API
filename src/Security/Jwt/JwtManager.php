@@ -6,7 +6,6 @@ namespace App\Security\Jwt;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use RuntimeException;
 use stdClass;
 
 final class JwtManager
@@ -20,7 +19,7 @@ final class JwtManager
         private readonly string $issuer
     ) {
         if (strlen($secret) < self::MIN_SECRET_BYTES) {
-            throw new RuntimeException(sprintf(
+            throw new InvalidJwtSecretException(sprintf(
                 'JWT_SECRET must be at least %d bytes long for HS256.',
                 self::MIN_SECRET_BYTES
             ));
