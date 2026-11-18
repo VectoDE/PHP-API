@@ -16,6 +16,7 @@ spl_autoload_register(static function (string $class): void {
     }
 });
 
+use App\Security\Jwt\InvalidJwtSecretException;
 use App\Security\Jwt\JwtManager;
 
 function check(bool $condition, string $message): void
@@ -44,3 +45,11 @@ try {
     $rejected = true;
 }
 check($rejected, 'tampered token is rejected');
+
+$tooShort = false;
+try {
+    new JwtManager(str_repeat('s', 31), 3600, 'smoke-test');
+} catch (InvalidJwtSecretException) {
+    $tooShort = true;
+}
+check($tooShort, 'too short secret raises InvalidJwtSecretException');
