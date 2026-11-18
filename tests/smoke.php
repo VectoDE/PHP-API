@@ -5,13 +5,13 @@ declare(strict_types=1);
 // Smoke test: Composer autoload, project autoloader and JwtManager round trip.
 // Runs without a test framework; exits non-zero on the first failed check.
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 spl_autoload_register(static function (string $class): void {
     if (str_starts_with($class, 'App\\')) {
         $file = dirname(__DIR__) . '/src/' . str_replace('\\', '/', substr($class, 4)) . '.php';
         if (is_file($file)) {
-            require $file;
+            require_once $file;
         }
     }
 });
