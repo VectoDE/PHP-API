@@ -92,7 +92,7 @@ A production-focused REST API skeleton built with PHP 8, Composer, MySQL (via PD
 | `DB_PASSWORD`   | MySQL password                                                              | `secret`                   |
 | `DB_CHARSET`    | Database charset                                                            | `utf8mb4`                  |
 | `DB_TIMEZONE`   | Database session timezone                                                   | `+00:00`                   |
-| `JWT_SECRET`    | Secret key used to sign JWTs – **must be replaced in production**           | `please-change-me-super-secret-key` |
+| `JWT_SECRET`    | Secret key used to sign JWTs – **must be replaced in production**, min. 32 bytes | `please-change-me-super-secret-key` |
 | `JWT_TTL`       | Token lifetime in seconds                                                   | `3600`                     |
 
 ## API overview

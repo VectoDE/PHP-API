@@ -6,15 +6,25 @@ namespace App\Security\Jwt;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use RuntimeException;
 use stdClass;
 
 final class JwtManager
 {
+    /** firebase/php-jwt >= 7 rejects HS256 keys shorter than 256 bit (32 bytes). */
+    private const MIN_SECRET_BYTES = 32;
+
     public function __construct(
         private readonly string $secret,
         private readonly int $ttl,
         private readonly string $issuer
     ) {
+        if (strlen($secret) < self::MIN_SECRET_BYTES) {
+            throw new RuntimeException(sprintf(
+                'JWT_SECRET must be at least %d bytes long for HS256.',
+                self::MIN_SECRET_BYTES
+            ));
+        }
     }
 
     /**
