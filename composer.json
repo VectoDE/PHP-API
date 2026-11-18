@@ -1,5 +1,10 @@
 {
+    "name": "vectode/php-api",
+    "description": "Enterprise-ready PHP REST API skeleton with JWT authentication, RBAC and project management",
+    "type": "project",
+    "license": "MIT",
     "require": {
+        "php": "^8.1",
         "firebase/php-jwt": "^6.10"
     }
 }
